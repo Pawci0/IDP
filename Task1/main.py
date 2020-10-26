@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import json
 
 with open('config/config.json') as configFile:
@@ -7,13 +6,24 @@ with open('config/config.json') as configFile:
 
 epochs = config['epochs']
 trainingStep = config['trainingStep']
+wBoundLower = config['wBoundLower']
+wBoundUpper = config['wBoundUpper']
+boundLower = config['boundLower']
+boundUpper = config['boundUpper']
+mPatterns = config['mPatterns']
+nInputs = config['nInputs']
 
-patterns = np.loadtxt(config['path'], ndmin=2)
+if config['mode'] == 'F':
+    patterns = np.loadtxt(config['path'], ndmin=2)
+    inputs = patterns[:, :-1]
+    expectedOutput = patterns[:, -1:].flatten()
 
-inputs = patterns[:, :-1]
-expectedOutput = patterns[:, -1:].flatten()
+elif config['mode'] == 'R':
+    inputs = np.random.uniform(
+        boundLower, boundUpper, size=(mPatterns, nInputs))
+    expectedOutput = np.random.uniform(boundLower, boundUpper, size=mPatterns)
 
-weights = [random.uniform(-1, 1) for _ in range(inputs.shape[1])]
+weights = np.random.uniform(wBoundLower, wBoundUpper, size=inputs.shape[1])
 
 for i in range(epochs):
 

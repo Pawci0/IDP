@@ -1,5 +1,12 @@
 {
+	"mode":"F", 
 	"path":"patterns/patterns1.txt",
 	"epochs":100,
-	"trainingStep":0.001
+	"trainingStep":0.001,
+	"nInputs": 5,
+	"mPatterns": 5,
+	"wBoundLower": -1,
+	"wBoundUpper": 1,
+	"boundLower": -1,
+	"boundUpper": 1
 }
