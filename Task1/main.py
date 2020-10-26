@@ -13,15 +13,15 @@ boundUpper = config['boundUpper']
 mPatterns = config['mPatterns']
 nInputs = config['nInputs']
 
-if config['mode'] == 'F':
-    patterns = np.loadtxt(config['path'], ndmin=2)
-    inputs = patterns[:, :-1]
-    expectedOutput = patterns[:, -1:].flatten()
-
-elif config['mode'] == 'R':
+if config['isRandom']:
     inputs = np.random.uniform(
         boundLower, boundUpper, size=(mPatterns, nInputs))
     expectedOutput = np.random.uniform(boundLower, boundUpper, size=mPatterns)
+
+else:
+    patterns = np.loadtxt(config['path'], ndmin=2)
+    inputs = patterns[:, :-1]
+    expectedOutput = patterns[:, -1:].flatten()
 
 weights = np.random.uniform(wBoundLower, wBoundUpper, size=inputs.shape[1])
 

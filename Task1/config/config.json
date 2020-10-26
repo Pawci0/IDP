@@ -1,5 +1,5 @@
 {
-	"mode":"F", 
+	"isRandom":0, 
 	"path":"patterns/patterns1.txt",
 	"epochs":100,
 	"trainingStep":0.001,
