@@ -47,21 +47,30 @@ def main():
         expectedOutput = patterns[:, -1:].flatten()
 
     weights = generateInitialWeights(wBoundLower, wBoundUpper, inputs.shape[1])
+    initialWeights = weights.copy()
 
     error = []
     for _ in range(epochs):
         errorSum = 0
+        outputs = []
         for i in range(inputs.shape[0]):
             output = calculateOutput(inputs[i], weights)
+            outputs.append(output)
             errorSum += (expectedOutput[i] - output) ** 2
             calculateWeights(
                 weights, trainingStep, inputs[i],  output, expectedOutput[i])
         error.append(errorSum / inputs.shape[0])
 
-    print('Epochs: ', epochs)
-    print('Training step: ', trainingStep)
-    print('Final weights: ', weights)
+    print('\nEpochs: ', epochs)
+    print('\nTraining step: ', trainingStep)
+    print('\nInputs:\n', inputs)
+    print('\nExpected output:\n', expectedOutput)
+    print('\nFinal output: ', outputs)
+    print('\nInitial weights:\n', initialWeights)
+    print('\nFinal weights:\n', weights)
+    print('\nFinal error:\n', error[-1])
 
+    plt.figure('Mean Square Error')
     sb.lineplot(data=error)
     plt.title('Mean Square Error')
     plt.ylabel('Error')

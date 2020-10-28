@@ -1,7 +1,7 @@
 {
 	"isRandom":0, 
 	"path":"patterns/patterns1.txt",
-	"epochs":100,
+	"epochs":1000,
 	"trainingStep":0.001,
 	"nInputs": 5,
 	"mPatterns": 5,
